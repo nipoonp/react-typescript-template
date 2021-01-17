@@ -86,8 +86,8 @@ const flattenRoutes = (routes: any[]) => {
 // All routes
 const allRoutes = [rootRoute, otherRoutes, authRoutes];
 
-const authProtectedRoutes = [otherRoutes];
+const appMenuRoutes = [otherRoutes];
 
 const allFlattenRoutes = flattenRoutes(allRoutes);
 
-export { allRoutes, authProtectedRoutes, allFlattenRoutes };
+export { allRoutes, appMenuRoutes, allFlattenRoutes };

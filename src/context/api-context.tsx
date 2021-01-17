@@ -5,6 +5,8 @@ import { BASE_URL } from "../constants/constants";
 import axios from "axios";
 
 type ContextProps = {
+    isUserLoggedIn: boolean,
+    setIsUserLoggedIn: (isLoggedIn: boolean) => void,
     loginUser: (username: string, password: string) => Promise<any>,
     refreshToken: () => Promise<any>,
     getTenants: () => Promise<any>,
@@ -16,6 +18,8 @@ type ContextProps = {
 };
 
 const APIContext = React.createContext<ContextProps>({
+    isUserLoggedIn: false,
+    setIsUserLoggedIn: (isLoggedIn: boolean) => { },
     loginUser: (username: string, password: string) => {
         return new Promise(() => { });
     },
@@ -43,6 +47,7 @@ const APIContext = React.createContext<ContextProps>({
 });
 
 const APIProvider = (props: { children: React.ReactNode }) => {
+    const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
     const [accessToken, setAccessToken] = useState("");
 
     // User
@@ -136,6 +141,8 @@ const APIProvider = (props: { children: React.ReactNode }) => {
     return (
         <APIContext.Provider
             value={{
+                isUserLoggedIn: isUserLoggedIn,
+                setIsUserLoggedIn: setIsUserLoggedIn,
                 loginUser: loginUser,
                 refreshToken: refreshToken,
                 getTenants: getTenants,

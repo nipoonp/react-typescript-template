@@ -8,7 +8,7 @@ import { useAPI } from '../../context/api-context';
 
 export const Login = () => {
     const history = useHistory();
-    const { loginUser, refreshToken } = useAPI();
+    const { setIsUserLoggedIn, loginUser, refreshToken } = useAPI();
     const [showSpinner, setShowSpinner] = useState(false);
     const [error, setError] = useState();
 
@@ -16,12 +16,19 @@ export const Login = () => {
         (async function token() {
             try {
                 await refreshToken();
-                history.replace("/")
+
+                redirectUser();
             } catch (e) {
                 console.log(e.message);
             }
         })();
-    }, [])
+    }, []);
+
+    const redirectUser = () => {
+        setIsUserLoggedIn(true);
+        history.replace("/")
+    }
+
 
     const handleValidSubmit = async (event: any, values: any) => {
         setShowSpinner(true);
@@ -29,12 +36,10 @@ export const Login = () => {
             let res = await loginUser(values.username, values.password);
             console.log(res);
 
-            history.replace("/");
-
             if (res.error) {
                 throw Error(res.data.error);
             } else {
-                // console.log(res.data.accessToken);
+                redirectUser();
             }
         } catch (e) {
             setError(e.message);
