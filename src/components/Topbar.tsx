@@ -1,14 +1,11 @@
 // @flow
 import React from 'react';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
-
 import LanguageDropdown from './LanguageDropdown';
 import NotificationDropdown from './NotificationDropdown';
 import ProfileDropdown from './ProfileDropdown';
 import SearchDropdown from './SearchDropdown';
 import TopbarSearch from './TopbarSearch';
-
 import profilePic from '../assets/images/users/avatar-1.jpg';
 import logoSm from '../assets/images/logo_sm.png';
 import logo from '../assets/images/logo-light.png';

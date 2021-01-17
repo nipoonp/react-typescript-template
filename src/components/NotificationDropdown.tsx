@@ -36,11 +36,10 @@ const NotificationDropdown = (props: NotificationDropdownProps) => {
     const [notificationContainerStyle, setNotificationContainerStyle] = useState<NotificationContainerStyle>(notificationHideContainerStyle);
 
     const toggleDropdown = () => {
-        setDropdownOpen(dropdownOpen);
+        setDropdownOpen(!dropdownOpen);
         setNotificationContainerStyle(notificationContainerStyle === notificationContainerStyle
             ? notificationShowContainerStyle
             : notificationHideContainerStyle);
-
     }
 
     const getRedirectUrl = (item: NotificationItem) => {

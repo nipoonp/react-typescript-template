@@ -20,7 +20,7 @@ const ProfileDropdown = (props: ProfileDropdownProps) => {
     const [dropdownOpen, setDropdownOpen] = useState<boolean>(false);
 
     const toggleDropdown = () => {
-        setDropdownOpen(dropdownOpen);
+        setDropdownOpen(!dropdownOpen);
     }
 
     const profilePic = props.profilePic || null;
