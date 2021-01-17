@@ -4,6 +4,8 @@ import { Route } from 'react-router-dom';
 
 // auth
 import { Login } from '../pages/auth/Login';
+import Page3 from '../pages/Page3';
+import Page4 from '../pages/Page4';
 
 // other
 const Page1 = React.lazy(() => import('../pages/Page1'));
@@ -68,6 +70,26 @@ const otherRoutes = {
     ],
 };
 
+const otherRoutes2 = {
+    path: '/components',
+    name: 'Components',
+    icon: 'uil-home-alt',
+    children: [
+        {
+            path: '/components/page3',
+            name: 'Page3',
+            component: Page3,
+            route: PrivateRoute,
+        },
+        {
+            path: '/components/page4',
+            name: 'Page4',
+            component: Page4,
+            route: PrivateRoute,
+        },
+    ],
+};
+
 // flatten the list of all nested routes
 const flattenRoutes = (routes: any[]) => {
     let flatRoutes: any[] = [];
@@ -84,9 +106,9 @@ const flattenRoutes = (routes: any[]) => {
 };
 
 // All routes
-const allRoutes = [rootRoute, otherRoutes, authRoutes];
+const allRoutes = [rootRoute, otherRoutes, otherRoutes2, authRoutes];
 
-const appMenuRoutes = [otherRoutes];
+const appMenuRoutes = [otherRoutes, otherRoutes2];
 
 const allFlattenRoutes = flattenRoutes(allRoutes);
 

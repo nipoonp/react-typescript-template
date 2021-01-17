@@ -14,7 +14,7 @@ const Navbar = (props: NavbarProps) => {
                 <div className="container-fluid">
                     <nav className="navbar navbar-dark navbar-expand-lg topnav-menu">
                         <Collapse isOpen={props.isMenuOpened} className="navbar-collapse" id="topnav-menu-content">
-                            <AppMenu mode={'horizontal'} />
+                            <AppMenu />
                         </Collapse>
                     </nav>
                 </div>

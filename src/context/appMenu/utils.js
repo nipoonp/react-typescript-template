@@ -15,6 +15,7 @@ let uuid = 1;
         uuid += 1;
         item.id = id;
         item.parentId = item.parentId || parentId;
+        item.path = item.path
         item.active = false;
 
         if (typeof item.children !== 'undefined') {

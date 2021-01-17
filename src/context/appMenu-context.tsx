@@ -1,20 +1,18 @@
 import React, { useState } from "react";
 // import assignIds from '../redux/appMenu/utils';
 import { appMenuRoutes as routes } from '../routes';
+import MenuItem from "./appMenu/models";
 import assignIds from './appMenu/utils';
 
 
-// ADD THIS BACK WHEN CHANGED TO TYPESCRIPT
-// type ContextProps = {
-//     login: () => void;
-// };
+type ContextProps = {
+    menuItems: MenuItem[],
+    activatedMenuItemIds: number[],
+    initMenuAndItems: () => void,
+    changeActiveMenuFromLocation: () => void,
+};
 
-// const AppMenuContext = React.createContext<ContextProps>({
-//     login: () => { },
-// });
-
-
-const AppMenuContext = React.createContext({
+const AppMenuContext = React.createContext<ContextProps>({
     menuItems: [],
     activatedMenuItemIds: [],
     initMenuAndItems: () => { },
@@ -22,11 +20,8 @@ const AppMenuContext = React.createContext({
 });
 
 const AppMenuProvider = (props: { children: React.ReactNode }) => {
-    const [menuItems, setMenuItems] = useState([]);
-    const [activatedMenuItemIds, setActivatedMenuItemIds] = useState([]);
-
-    const getActivatedMenuItemIds = (menuItemsList: any[]): any => {
-        var matchingItems = [];
+    const getActivatedMenuItemIds = (menuItemsList: MenuItem[]): number[] => {
+        var matchingItems: number[] = [];
         for (var menuItem of menuItemsList) {
             if (window.location.pathname.indexOf(menuItem.path) === 0) {
                 matchingItems.push(menuItem.id);
@@ -40,14 +35,17 @@ const AppMenuProvider = (props: { children: React.ReactNode }) => {
         return matchingItems;
     };
 
+    const [menuItems, setMenuItems] = useState<MenuItem[]>(assignIds(routes));
+    const [activatedMenuItemIds, setActivatedMenuItemIds] = useState<number[]>(getActivatedMenuItemIds(menuItems));
+
     const initMenuAndItems = () => {
-        const menuItems = assignIds(routes);
+        const menuItems: MenuItem[] = assignIds(routes);
 
         setMenuItems(menuItems);
     }
 
     const changeActiveMenuFromLocation = () => {
-        const menuItems = assignIds(routes);
+        const menuItems: MenuItem[] = assignIds(routes);
         const activatedMenuItemIds = getActivatedMenuItemIds(menuItems);
 
         setActivatedMenuItemIds(activatedMenuItemIds);
